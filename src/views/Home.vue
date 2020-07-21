@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <BaseNavBar></BaseNavBar>
     <img src="../assets/logo.png" />
     <div>
       <p>
@@ -16,11 +17,23 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
+import BaseNavBar from "@/components/BaseNavBar.vue";
 
 export default {
   name: "Home",
   components: {
-    HelloWorld
+    HelloWorld,
+    BaseNavBar
   }
 };
 </script>
+
+<style scoped>
+.home {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+</style>
