@@ -1,7 +1,7 @@
 .DS_Store
 node_modules
 /dist
-/assets/oss/*
+src/assets/oss/*
 
 # local env files
 .env.local
