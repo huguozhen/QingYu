@@ -12,12 +12,9 @@
             ><el-button slot="append" icon="el-icon-search"></el-button>
           </el-input></div
       ></el-col>
-      <el-col :span="2" :offset="6"
-        ><router-link to="/login">登录</router-link></el-col
-      >
-      <el-col :span="2"><el-button round>注册</el-button></el-col>
+      <el-col :span="2" :offset="8"><el-button round>登录</el-button></el-col>
       <el-col :span="2"
-        ><el-button type="primary" round>写文章</el-button></el-col
+        ><el-button type="primary" round>注册</el-button></el-col
       >
     </el-row>
   </div>
