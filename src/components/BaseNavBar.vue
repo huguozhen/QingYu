@@ -3,7 +3,7 @@
     <el-row type="flex" align="middle">
       <el-col :span="6"
         ><div id="logo">
-          <div><router-link to="/">轻语</router-link></div>
+          <router-link to="/">轻语</router-link>
         </div></el-col
       >
       <el-col :span="6"
@@ -32,6 +32,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#logo {
+  text-align: center;
+}
 .BaseNavBar {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
   padding: 10px;

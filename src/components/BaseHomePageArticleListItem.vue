@@ -1,20 +1,20 @@
 <template>
-  <div class="base-article-list-item">
+  <div class="base-div">
     <h3>{{ title }}</h3>
-    <div class="article-list-item-abstract">{{ abstract }}</div>
-    <div class="article-list-item-info">
+    <div class="item-abstract">{{ abstract }}</div>
+    <div class="item-info">
       <span><i class="el-icon-view"></i>{{ views }}</span>
       <span>{{ author_name }}</span>
       <span><i class="el-icon-chat-line-square"></i>{{ reviews }}</span>
       <span><i class="el-icon-star-off"></i>{{ likes }}</span>
     </div>
-    <hr style="background-color: #e6e6e6; height:1px; border:none" />
+    <hr class="split-line" />
   </div>
 </template>
 
 <script>
 export default {
-  name: "BaseArticleListItem",
+  name: "BaseHomePageArticleListItem",
   data() {
     return {
       title:
@@ -31,18 +31,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.base-article-list-item {
+.base-div {
   text-align: left;
 }
 span {
   margin-right: 10px;
 }
-.article-list-item-abstract {
+.item-abstract {
   color: #909399;
 }
-.article-list-item-info {
+.item-info {
   color: #909399;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+.split-line {
+  background-color: #e6e6e6;
+  height: 1px;
+  border: none;
 }
 </style>

@@ -1,11 +1,11 @@
 <template>
-  <div class="base-recommended-author-list-item">
+  <div class="base-div">
     <div style="float:left">
       <img class="avatar-img" src="../assets/oss/avatar_img/001.jpg" />
     </div>
     <div style="float:right"><a>+关注</a></div>
-    <div style="padding-left:50px; text-align:left">{{ user_name }}</div>
-    <div class="author-list-item-info">
+    <div class="item-username">{{ user_name }}</div>
+    <div class="item-info">
       <span>写了{{ article_num }}篇文章</span>
       <span>{{ likes }}人喜欢</span>
     </div>
@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: "BaseRecommendedAuthorListItem",
+  name: "BaseHomePageAuthorListItem",
   data() {
     return { user_name: "董克平日记", article_num: 107, likes: "4.3k" };
   }
@@ -22,7 +22,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.base-recommended-author-list-item {
+.base-div {
   margin-bottom: 20px;
 }
 .avatar-img {
@@ -34,10 +34,14 @@ export default {
   justify-content: center;
   overflow: hidden;
 }
+.item-username {
+  padding-left: 50px;
+  text-align: left;
+}
 span {
   margin-right: 10px;
 }
-.author-list-item-info {
+.item-info {
   padding-left: 50px;
   text-align: left;
   color: #909399;
