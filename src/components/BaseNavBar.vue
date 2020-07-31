@@ -1,9 +1,30 @@
 <template>
   <div class="BaseNavBar">
-    <el-row type="flex" align="middle">
-      <el-col :span="6"
+    <el-row type="flex" align="middle" justify="center">
+      <el-col :span="4"
         ><div id="logo">
           <router-link to="/">轻语</router-link>
+        </div></el-col
+      >
+      <el-col :span="2"
+        ><div v-if="login_status === true">
+          <router-link to="/like">关注</router-link>
+        </div></el-col
+      >
+      <el-col :span="2"
+        ><div v-if="login_status === true">
+          <el-dropdown>
+            <span> 消息<i class="el-icon-arrow-down"></i> </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item>评论</el-dropdown-item>
+              <el-dropdown-item>私信</el-dropdown-item>
+              <el-dropdown-item>投稿请求</el-dropdown-item>
+              <el-dropdown-item>喜欢和赞</el-dropdown-item>
+              <el-dropdown-item>关注</el-dropdown-item>
+              <el-dropdown-item>赞赏和付费</el-dropdown-item>
+              <el-dropdown-item>其它提醒</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
         </div></el-col
       >
       <el-col :span="6"
@@ -12,9 +33,44 @@
             ><el-button slot="append" icon="el-icon-search"></el-button>
           </el-input></div
       ></el-col>
-      <el-col :span="2" :offset="8"><el-button round>登录</el-button></el-col>
+      <el-col :span="2" :offset="6"
+        ><div v-if="login_status === true">
+          <el-switch
+            v-model="night_mode"
+            active-icon-class="el-icon-moon"
+            inactive-icon-class="el-icon-sunny"
+          >
+          </el-switch></div
+      ></el-col>
       <el-col :span="2"
-        ><el-button type="primary" round>注册</el-button></el-col
+        ><div v-if="login_status === true">
+          <el-dropdown>
+            <div class="avatar-dropdown">
+              <img class="avatar-img" v-bind:src="user_info.avatar_url" /><span
+                ><i class="el-icon-arrow-down"></i
+              ></span>
+            </div>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item>我的主页</el-dropdown-item>
+              <el-dropdown-item>收藏的文章</el-dropdown-item>
+              <el-dropdown-item>喜欢的文章</el-dropdown-item>
+              <el-dropdown-item>已购内容</el-dropdown-item>
+              <el-dropdown-item>我的钱包</el-dropdown-item>
+              <el-dropdown-item>设置</el-dropdown-item>
+              <el-dropdown-item>帮助和反馈</el-dropdown-item>
+              <el-dropdown-item @click.native="logout">退出</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </div>
+        <div v-else><el-button round @click="login">登录</el-button></div>
+      </el-col>
+      <el-col :span="2"
+        ><div v-if="login_status === true">
+          <el-button type="primary" round>写文章</el-button>
+        </div>
+        <div v-else>
+          <el-button type="primary" round>注册</el-button>
+        </div></el-col
       >
     </el-row>
   </div>
@@ -25,18 +81,68 @@ export default {
   name: "BaseNavBar",
   data() {
     return {
+      login_status: false,
+      user_info: null,
+      night_mode: false,
       seatchText: ""
     };
+  },
+  created() {
+    this.checkLogin();
+  },
+  methods: {
+    login() {
+      let user_info = {
+        username: "Claps",
+        avatar_url: "https://i.loli.net/2020/07/31/JrFk4t6MjHgi1oy.jpg"
+      };
+      let dataStr = JSON.stringify({
+        val: user_info,
+        timer: new Date().getTime()
+      });
+      localStorage.setItem("user", dataStr);
+      this.user_info = user_info;
+      this.login_status = true;
+    },
+    logout() {
+      localStorage.removeItem("user");
+      this.login_status = false;
+    },
+    checkLogin() {
+      const exp = 600000; // 设置保留时间为10分钟
+      if (localStorage.getItem("user")) {
+        let vals = localStorage.getItem("user"); // 获取本地存储的值
+        let dataObj = JSON.parse(vals); // 将字符串转换成JSON对象
+        // 如果(当前时间 - 存储的元素在创建时候设置的时间) > 过期时间
+        let isTimed = new Date().getTime() - dataObj.timer > exp;
+        if (!isTimed) {
+          this.user_info = dataObj.val;
+          this.login_status = true;
+        } else {
+          localStorage.removeItem("user");
+        }
+      }
+    }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-#logo {
-  text-align: center;
-}
 .BaseNavBar {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
   padding: 10px;
+  text-align: center;
+  vertical-align: middle;
+}
+.avatar-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.avatar-dropdown {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 </style>
