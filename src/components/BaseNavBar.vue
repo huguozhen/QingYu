@@ -1,19 +1,20 @@
 <template>
   <div class="BaseNavBar">
     <el-row type="flex" align="middle" justify="center">
-      <el-col :span="4"
-        ><div id="logo">
-          <router-link to="/">轻语</router-link>
-        </div></el-col
+      <el-col :span="4">
+        <router-link to="/"
+          ><img
+            class="logo"
+            src="../assets/oss/logo_img/qylogo.png"/></router-link
+      ></el-col>
+      <el-col :span="2"
+        ><el-button type="text" v-if="login_status === true" class="nav-button">
+          关注
+        </el-button></el-col
       >
       <el-col :span="2"
         ><div v-if="login_status === true">
-          <router-link to="/like">关注</router-link>
-        </div></el-col
-      >
-      <el-col :span="2"
-        ><div v-if="login_status === true">
-          <el-dropdown>
+          <el-dropdown class="nav-button">
             <span> 消息<i class="el-icon-arrow-down"></i> </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>评论</el-dropdown-item>
@@ -33,7 +34,7 @@
             ><el-button slot="append" icon="el-icon-search"></el-button>
           </el-input></div
       ></el-col>
-      <el-col :span="2" :offset="6"
+      <el-col :span="2" :offset="4"
         ><div v-if="login_status === true">
           <el-switch
             v-model="night_mode"
@@ -44,11 +45,10 @@
       ></el-col>
       <el-col :span="2"
         ><div v-if="login_status === true">
-          <el-dropdown>
+          <el-dropdown class="nav-button">
             <div class="avatar-dropdown">
-              <img class="avatar-img" v-bind:src="user_info.avatar_url" /><span
-                ><i class="el-icon-arrow-down"></i
-              ></span>
+              <el-avatar :size="40" :src="user_info.avatar_url"></el-avatar
+              ><span><i class="el-icon-arrow-down"></i></span>
             </div>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>我的主页</el-dropdown-item>
@@ -130,14 +130,18 @@ export default {
 <style lang="scss" scoped>
 .BaseNavBar {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
-  padding: 10px;
   text-align: center;
-  vertical-align: middle;
+  height: 60px;
 }
-.avatar-img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+.logo {
+  height: 60px;
+}
+.nav-button {
+  color: $base-color-text-regular;
+}
+.nav-button:hover {
+  color: $base-color-primary;
+  cursor: pointer;
 }
 .avatar-dropdown {
   display: flex;
