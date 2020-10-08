@@ -54,21 +54,24 @@
               ></span
             >
           </div>
-          <ul id="author-list" v-loading="loading_author">
+          <ul v-loading="loading_author">
             <li v-for="(author_obj, count) in author_info_list" :key="count">
               <BaseAuthorListItem
                 :author_info="author_obj"
+                :showFollowButton="true"
               ></BaseAuthorListItem>
             </li>
           </ul>
         </el-col>
       </el-row>
     </div>
-    <el-row :gutter="40" class="page-footer">
-      <el-col :span="16" :offset="4">
-        <BaseHomePageFooter></BaseHomePageFooter>
-      </el-col>
-    </el-row>
+    <div class="page-footer">
+      <el-row :gutter="40">
+        <el-col :span="16" :offset="4">
+          <BaseHomePageFooter></BaseHomePageFooter>
+        </el-col>
+      </el-row>
+    </div>
   </div>
 </template>
 
@@ -119,7 +122,6 @@ export default {
       for (let i in article_list) {
         let article_obj = article_list[i];
         let user_slug = article_obj.object.data.user.slug;
-        console.log("/api/asimov/users/slug/" + user_slug + "/");
         this.axios
           .get("/api/asimov/users/slug/" + user_slug + "/")
           .then(response => {
@@ -191,13 +193,18 @@ ul {
 }
 .page-main {
   flex: 1;
+  width: 1600px;
+  margin: 0 auto;
 }
 .carousel-img {
   width: 100%;
   height: auto;
 }
 .page-footer {
-  margin-top: 40px;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  width: 1600px;
+  margin: 0 auto;
 }
 .author-list-header {
   display: flex;

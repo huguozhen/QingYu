@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
-    <el-row type="flex" align="middle">
-      <el-col :span="6">
+    <el-row :gutter="60" type="flex" align="middle">
+      <el-col :span="4">
         <router-link to="/author"
           ><el-avatar
             style="margin-top:16px"
@@ -10,20 +10,20 @@
           ></el-avatar
         ></router-link>
       </el-col>
-      <el-col :span="18">
+      <el-col :span="20">
         <div>
           <el-row type="flex" align="middle" justify="space-between">
             <router-link to="author">{{ author_info.nickname }}</router-link>
-            <el-button type="text">+关注</el-button>
+            <el-button type="text" v-if="showFollowButton === true"
+              >+关注</el-button
+            >
           </el-row>
-          <el-row
-            ><div class="author-wordage-and-likes">
-              <span style="margin-right:10px"
-                >写了{{ author_wordage_format }}字</span
-              >
-              <span>{{ author_likes_count_format }}人喜欢</span>
-            </div></el-row
-          >
+          <el-row class="author-wordage-and-likes">
+            <span style="margin-right:10px"
+              >写了{{ author_wordage_format }}字</span
+            >
+            <span>{{ author_likes_count_format }}人喜欢</span>
+          </el-row>
         </div>
       </el-col>
     </el-row>
@@ -33,7 +33,7 @@
 <script>
 export default {
   name: "BaseAuthorListItem",
-  props: ["author_info"],
+  props: ["author_info", "showFollowButton"],
   computed: {
     author_wordage_format: function() {
       let res;
